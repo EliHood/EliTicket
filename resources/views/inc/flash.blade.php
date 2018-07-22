@@ -1,5 +1,5 @@
-@if (session('status'))
+@if (Session::has('message'))
     <div class="alert alert-success">
-        {{ session('status') }}
+        {{ Session::get('message') }}
     </div>
 @endif

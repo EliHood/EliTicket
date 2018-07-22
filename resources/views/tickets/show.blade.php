@@ -30,6 +30,21 @@
 
                     <hr>
 
+                    <div class="comments">
+                        @foreach ($comments as $comment)
+                            <div class="card-@if($ticket->user->id === $comment->user_id) {{"default"}}@else{{"success"}}@endif">
+                                <div class="card-header">
+                                    {{ $comment->user->name }}
+                                    <span class="pull-right">{{ $comment->created_at->format('Y-m-d') }}</span>
+                                </div>
+
+                                <div class="card-body">
+                                    {{ $comment->comment }}     
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+
                     <div class="comment-form">
                         <form action="{{ url('comment') }}" method="POST" class="form">
                             {!! csrf_field() !!}

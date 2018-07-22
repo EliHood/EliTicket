@@ -24,4 +24,15 @@ class Ticket extends Model
 	{
 		return $query->where('ticket_id', $ticket_id);
 	}
+
+	
+	public function comments()
+	{
+	    return $this->hasMany(Comment::class);
+	}
+
+	public function user()
+	{
+	    return $this->belongsTo(User::class);
+	}
 }
