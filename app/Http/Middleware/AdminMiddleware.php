@@ -17,7 +17,7 @@ class AdminMiddleware
     public function handle($request, Closure $next)
     {
 
-        if (Auth::user()->is_admin !== 0) {
+        if (Auth::user()->is_admin !== 1) {
             return redirect('home')->with('message', 'You are not an admin');
         } 
 
