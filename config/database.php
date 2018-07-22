@@ -1,5 +1,26 @@
 <?php
 
+// if its not on heroku variables are = to the env 
+
+$host = env('DB_HOST', '127.0.0.1');
+$port = env('DB_PORT', '3306');
+$database = env('DB_DATABASE', 'forge');
+$username = env('DB_USERNAME', 'forge');
+$password = env('DB_PASSWORD', 'forge');
+
+// if on heroku do this pretty versatile
+if($databaseUrl = getenv('CLEARDB_DATABASE_URL')) {
+
+    $url = parse_url($databaseUrl);
+
+    $host = $url['host'];
+    $username = $url['user'];
+    $password = $url['pass'];
+    $database = substr($url['path'], 1);
+}
+
+
+
 return [
 
     /*
@@ -41,11 +62,11 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            'host' => $host,
+            'port' => $port,
+            'database' => $database,
+            'username' => $username,
+            'password' => $password,
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
