@@ -8,7 +8,7 @@
 
 <div class="container">
     <div class="row">
-        <h3>{{ $ticket->message }}</h3>
+     
         <div class="col-md-10 offset-md-2">
             <div class="card">
                 <div class="card-header">
@@ -18,7 +18,7 @@
                     
                     <div class="ticket-info">
                         
-                        
+                           <h3>{{ $ticket->message }}</h3>
                         <p>
                             @if ($ticket->status === 'Open')
                             Status: <span class="label label-success">{{ $ticket->status }}</span>
