@@ -4,7 +4,7 @@
 @section('title', $ticket->title)
 
 @section('content')
-@include('inc.flash')
+
 
 <div class="container">
     <div class="row">
@@ -17,7 +17,7 @@
                 <div class="card-body">
                     
                     <div class="ticket-info">
-                        
+                        @include('inc.flash')
                            <h3>{{ $ticket->message }}</h3>
                         <p>
                             @if ($ticket->status === 'Open')
