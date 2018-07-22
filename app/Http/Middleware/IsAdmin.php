@@ -3,9 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\Auth;
 
-class AdminMiddleware
+class IsAdmin
 {
     /**
      * Handle an incoming request.
@@ -16,11 +15,9 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-
-        if (Auth::user()->is_admin !== 1) {
+        if(auth()->user()->isAdmin()) {
             return redirect('home')->with('message', 'You are not an admin');
-        } 
-
+        }
         return $next($request);
     }
 }

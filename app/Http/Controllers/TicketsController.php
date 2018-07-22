@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 
 use App\Ticket;
-use App\Mailers\AppMailer;
+
 use Illuminate\Support\Facades\Auth;
 
 
@@ -23,13 +23,7 @@ class TicketsController extends Controller
     	return view('tickets.create');
     }
 
-    public function index()
-    {
-        $tickets = Ticket::paginate(10);
-   
 
-        return view('tickets.index', compact('tickets'));
-    }
 
    public function store(Request $request, AppMailer $mailer)
 	{
@@ -76,20 +70,7 @@ class TicketsController extends Controller
     }
 
 
-    public function close($ticket_id, AppMailer $mailer)
-    {
-        $ticket = Ticket::GetTicket($ticket_id)->firstOrFail();
 
-        $ticket->status = 'Closed';
-
-        $ticket->save();
-
-        $ticketOwner = $ticket->user;
-
-        $mailer->sendTicketStatusNotification($ticketOwner, $ticket);
-
-        return redirect()->back()->with("status", "The ticket has been closed.");
-    }
 
 
 }

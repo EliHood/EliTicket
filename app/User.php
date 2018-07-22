@@ -9,6 +9,9 @@ use App\Ticket;
 
 class User extends Authenticatable
 {
+    const ADMIN_TYPE = 'admin';
+    const DEFAULT_TYPE = 'default';
+
     use Notifiable;
 
     /**
@@ -37,5 +40,9 @@ class User extends Authenticatable
     public function tickets()
     {
         return $this->hasMany(Ticket::class);
+    }
+
+    public function isAdmin(){        
+        return $this->type === self::DEFAULT_TYPE;    
     }
 }

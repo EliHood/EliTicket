@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,7 +15,6 @@ class DatabaseSeeder extends Seeder
     {
          DB::table('users')->insert([
             'name' => 'EliHood',
-            'is_admin' => 1,
             'email' => 'level1mediamarketing@gmail.com',
             'password' => Hash::make('janemba'),
         ]);

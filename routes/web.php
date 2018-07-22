@@ -27,7 +27,7 @@ Route::get('tickets/{ticket_id}', 'TicketsController@show');
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
-    Route::get('tickets', 'TicketsController@index');
-    Route::post('close_ticket/{ticket_id}', 'TicketsController@close');
+Route::group(['prefix' => 'admin', 'middleware' => 'is_admin'], function() {
+    Route::get('tickets', 'AdminController@index');
+    Route::post('close_ticket/{ticket_id}', 'AdminController@close');
 });

@@ -21,7 +21,7 @@
                     You are logged in!
 
 
-                    @if (Auth::user()->is_admin)
+                    @if (!auth()->user()->isAdmin())
                         <p>
                             See all <a href="{{ url('admin/tickets') }}">tickets</a>
                         </p>

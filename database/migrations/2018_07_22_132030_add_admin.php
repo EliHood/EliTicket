@@ -14,7 +14,7 @@ class AddAdmin extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('is_admin')->unsigned()->default(0);
+            $table->string('type')->default('default');
         });
     }
 
