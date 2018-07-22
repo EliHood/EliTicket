@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 
 use App\Ticket;
-
+use App\Mailers\AppMailer;
 use Illuminate\Support\Facades\Auth;
 
 
