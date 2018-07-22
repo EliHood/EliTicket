@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Category;
+
 use App\Ticket;
 use App\Mailers\AppMailer;
 use Illuminate\Support\Facades\Auth;
@@ -18,26 +18,23 @@ class TicketsController extends Controller
         $this->middleware('auth');
     }
     
-    public function create()
-    {
-    	$categories = Category::all();
+    public function create(){
 
-    	return view('tickets.create', compact('categories'));
+    	return view('tickets.create');
     }
 
     public function index()
     {
         $tickets = Ticket::paginate(10);
-        $categories = Category::all();
+   
 
-        return view('tickets.index', compact('tickets', 'categories'));
+        return view('tickets.index', compact('tickets'));
     }
 
    public function store(Request $request, AppMailer $mailer)
 	{
 	    $this->validate($request, [
 	            'title'     => 'required',
-	            'category'  => 'required',
 	            'priority'  => 'required',
 	            'message'   => 'required'
 	    ]);
@@ -46,7 +43,6 @@ class TicketsController extends Controller
             'title'     => $request['title'],
             'user_id'   => Auth::user()->id,
             'ticket_id' => strtoupper(str_random(10)),
-            'category_id'  => $request['category'],
             'priority'  => $request['priority'],
             'message'   => $request['message'],
             'status'    => "Open",
@@ -63,9 +59,9 @@ class TicketsController extends Controller
     {
         $user = Auth::user()->id;
         $tickets = Ticket::Pageinate($user)->paginate(10);
-        $categories = Category::all();
 
-        return view('tickets.user_tickets', compact('tickets', 'categories'));
+
+        return view('tickets.user_tickets', compact('tickets'));
     }
 
     public function show($ticket_id)
@@ -74,9 +70,9 @@ class TicketsController extends Controller
 
         $comments = $ticket->comments;
 
-        $category = $ticket->category;
+  
 
-        return view('tickets.show', compact('ticket', 'category', 'comments'));
+        return view('tickets.show', compact('ticket','comments'));
     }
 
 

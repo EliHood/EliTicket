@@ -3,14 +3,15 @@
 @section('title', 'My Tickets')
 
 @section('content')
+<div class="container">
     <div class="row">
-        <div class="col-md-10 offset-md-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">
+        <div class="col-md-10 offset-md-1">
+            <div class="card">
+                <div class="card-header">
                     <i class="fa fa-ticket"> My Tickets</i>
                 </div>
 
-                <div class="panel-body">
+                <div class="card-body">
                     @if ($tickets->isEmpty())
                         <p>You have not created any tickets.</p>
                     @else
@@ -27,11 +28,7 @@
                             @foreach ($tickets as $ticket)
                                 <tr>
                                     <td>
-                                    @foreach ($categories as $category)
-                                        @if ($category->id === $ticket->category_id)
-                                            {{ $category->name }}
-                                        @endif
-                                    @endforeach
+                                 
                                     </td>
                                     <td>
                                         <a href="{{ url('tickets/'. $ticket->ticket_id) }}">
@@ -54,6 +51,7 @@
                         {{ $tickets->render() }}
                     @endif
                 </div>
+            </div>
             </div>
         </div>
     </div>

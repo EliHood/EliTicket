@@ -18,7 +18,7 @@ class AdminMiddleware
     {
 
         if (Auth::user()->is_admin !== 0) {
-            return redirect('home')->with('message', 'Username already in Use');
+            return redirect('home')->with('message', 'You are not an admin');
         } 
 
         return $next($request);

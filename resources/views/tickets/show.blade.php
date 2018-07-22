@@ -4,70 +4,63 @@
 @section('title', $ticket->title)
 
 @section('content')
- <div class="container">
+@include('inc.flash')
+
+<div class="container">
     <div class="row">
+        <h3>{{ $ticket->message }}</h3>
         <div class="col-md-10 offset-md-2">
             <div class="card">
                 <div class="card-header">
                     #{{ $ticket->ticket_id }} - {{ $ticket->title }}
                 </div>
-
                 <div class="card-body">
-                    @include('inc.flash')
-
+                    
                     <div class="ticket-info">
-                        <h3>{{ $ticket->message }}</h3>
-                        <p>Category: {{ $category->name }}</p>
+                        
+                        
                         <p>
-                        @if ($ticket->status === 'Open')
+                            @if ($ticket->status === 'Open')
                             Status: <span class="label label-success">{{ $ticket->status }}</span>
-                        @else
+                            @else
                             Status: <span class="label label-danger">{{ $ticket->status }}</span>
-                        @endif
+                            @endif
                         </p>
                         <p>Created on: {{ $ticket->created_at->diffForHumans() }}</p>
                     </div>
-
                     <hr>
-
                     <div class="comments">
                         @foreach ($comments as $comment)
-                            <div class="card-@if($ticket->user->id === $comment->user_id) {{"default"}}@else{{"success"}}@endif">
-                                <div class="card-header">
-                                    {{ $comment->user->name }}
-                                    <span class="pull-right">{{ $comment->created_at->format('Y-m-d') }}</span>
-                                </div>
-
-                                <div class="card-body">
-                                    {{ $comment->comment }}     
-                                </div>
+                        <div class="card-@if($ticket->user->id === $comment->user_id) {{"default"}}@else{{"success"}}@endif">
+                            <div class="card-header">
+                                {{ $comment->user->name }}
+                                <span class="pull-right">{{ $comment->created_at->format('Y-m-d') }}</span>
                             </div>
+                            <div class="card-body">
+                                {{ $comment->comment }}
+                            </div>
+                        </div>
                         @endforeach
                     </div>
-
                     <div class="comment-form">
                         <form action="{{ url('comment') }}" method="POST" class="form">
                             {!! csrf_field() !!}
-
                             <input type="hidden" name="ticket_id" value="{{ $ticket->id }}">
-
                             <div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">
                                 <textarea rows="10" id="comment" class="form-control" name="comment"></textarea>
-
                                 @if ($errors->has('comment'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('comment') }}</strong>
-                                    </span>
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('comment') }}</strong>
+                                </span>
                                 @endif
                             </div>
-
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
                         </form>
+                    </div>
                 </div>
             </div>
-        </div>
         </div>
     </div>
 @endsection
