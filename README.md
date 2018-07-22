@@ -4,11 +4,11 @@
 
 http://aqueous-retreat-39709.herokuapp.com/
 
-##Instructions
+###Instructions
 
 `composer install`
 
-##fill info for admin seeder
+###fill info for admin seeder
 
 `php artisan db:seed`
 
