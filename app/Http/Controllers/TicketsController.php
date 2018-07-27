@@ -34,11 +34,11 @@ class TicketsController extends Controller
 	    ]);
 
         $ticket = new Ticket([
-            'title'     => $request['title'],
+            'title'     => strip_tags($request['title']),
             'user_id'   => Auth::user()->id,
             'ticket_id' => strtoupper(str_random(10)),
             'priority'  => $request['priority'],
-            'message'   => $request['message'],
+            'message'   => strip_tags($request['message']),
             'status'    => "Open",
         ]);
 

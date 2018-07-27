@@ -25,6 +25,7 @@ class Ticket extends Model
 		return $query->where('ticket_id', $ticket_id);
 	}
 
+
 	
 	public function comments()
 	{
